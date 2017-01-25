@@ -18,6 +18,7 @@ class Snek(Widget):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.direction = "right"
         self.chunks = [SnekChunk(3,2), SnekChunk(2,2)]
 
     def on_chunks(self, *largs):
@@ -26,19 +27,29 @@ class Snek(Widget):
             self.add_widget(widge)
 
     def move(self, direction):
-        self.chunks.pop()
         new_chunk_x = self.chunks[0].chunk_x
         new_chunk_y = self.chunks[0].chunk_y
-        #FIXME: don't allow reverse
         #FIXME: detect collision
+
         if direction == "left":
+            if self.direction == "right":
+                return
             new_chunk_x -= 1
         elif direction == "right":
+            if self.direction == "left":
+                return
             new_chunk_x += 1
         elif direction == "down":
+            if self.direction == "up":
+                return
             new_chunk_y -= 1
         else:
+            if self.direction == "down":
+                return
             new_chunk_y += 1
+        self.direction = direction
+
+        self.chunks.pop()
         self.chunks.insert(0, SnekChunk(new_chunk_x, new_chunk_y))
 
 
