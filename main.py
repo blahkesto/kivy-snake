@@ -19,7 +19,7 @@ class Snek(Widget):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.direction = "right"
-        self.chunks = [SnekChunk(3,2), SnekChunk(2,2)]
+        self.chunks = [SnekChunk(4,2), SnekChunk(3,2), SnekChunk(2,2)]
 
     def on_chunks(self, *largs):
         self.clear_widgets()
