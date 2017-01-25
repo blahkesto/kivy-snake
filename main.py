@@ -29,7 +29,7 @@ class Snek(Widget):
     def move(self, direction):
         new_chunk_x = self.chunks[0].chunk_x
         new_chunk_y = self.chunks[0].chunk_y
-        #FIXME: detect collision
+        #TODO: detect collision with wall
 
         if direction == "left":
             if self.direction == "right":
@@ -47,10 +47,16 @@ class Snek(Widget):
             if self.direction == "down":
                 return
             new_chunk_y += 1
-        self.direction = direction
+
+        # detect if self is blocking the way
+        for chunk in self.chunks:
+            if chunk.chunk_x == new_chunk_x and chunk.chunk_y == new_chunk_y:
+                #TODO: Right now just not allowing movement. What to do?
+                return
 
         self.chunks.pop()
         self.chunks.insert(0, SnekChunk(new_chunk_x, new_chunk_y))
+        self.direction = direction
 
 
 class SnekGame(Widget):
