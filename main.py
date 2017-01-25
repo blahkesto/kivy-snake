@@ -2,9 +2,31 @@
 
 from kivy.app import App
 from kivy.uix.widget import Widget
+from kivy.properties import ObjectProperty, ListProperty
+
+
+class SnekChunk(Widget):
+    def __init__(self, chunk_x, chunk_y, **kwargs):
+        super().__init__(**kwargs)
+        self.pos = chunk_x * 25, chunk_y * 25
+
+
+class Snek(Widget):
+    chunks = ListProperty([])
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.chunks = [SnekChunk(2,2), SnekChunk(3,2)]
+
+    def on_chunks(self, *largs):
+        self.clear_widgets()
+        for widge in self.chunks:
+            self.add_widget(widge)
 
 
 class SnekGame(Widget):
+
+    snek = ObjectProperty(None)
 
     def on_touch_down(self, touch):
         x = touch.x / self.width * 100.0

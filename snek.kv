@@ -1,0 +1,14 @@
+#:kivy 1.9.1
+
+<SnekChunk>:
+    size: 25, 25
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<SnekGame>:
+    snek: player_snek
+
+    Snek:
+        id: player_snek
