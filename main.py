@@ -29,7 +29,7 @@ class Snek(Widget):
     def move(self, direction):
         new_chunk_x = self.chunks[0].chunk_x
         new_chunk_y = self.chunks[0].chunk_y
-        #TODO: detect collision with wall
+        #TODO: detect collision with wall. use root.height/width?
 
         if direction == "left":
             if self.direction == "right":
